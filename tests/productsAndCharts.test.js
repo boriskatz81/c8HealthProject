@@ -42,7 +42,6 @@ test.describe('Test Class 2 - Product and Chart Pages', () => {
             const productData1 = await productsPage.addProductIntoChart(0);
             const productData2 = await productsPage.addProductIntoChart(1, false);
 
-            await homePage.clickOnChart();
             const chartPage = new ChartPage(BaseDriver.page);
             await chartPage.validateChartPageIsLoaded()
             await chartPage.compareChartTableValues(0, productData1);
