@@ -1,0 +1,12 @@
+{
+  "name": "tiplati-assignment",
+  "version": "1.0.0",
+  "description": "Automation tests with Playwright",
+  "type": "commonjs",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}
