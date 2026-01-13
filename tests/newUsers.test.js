@@ -52,7 +52,6 @@ test.describe('Test Class 3 - Register User', () => {
            const pagesObjects = await logInProcess(newUserData);
            await pagesObjects.home.clickOnClickLogOut();
            await pagesObjects.home.validateLogInButtonExistence();
-           await BaseDriver.page.waitForTimeout(5000);
     });
 
     test('Test 4 - Login User with incorrect email and password', async () => {
@@ -62,7 +61,6 @@ test.describe('Test Class 3 - Register User', () => {
            };
 
            await logInProcess(invalidUserData, false);
-           await BaseDriver.page.waitForTimeout(5000);
     });
 
     test('Test 5 - Login User with correct email and password', async () => {

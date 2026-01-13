@@ -14,22 +14,12 @@ class BaseDriver {
     };
 
     static async firstNavigate() {
-       await this.page.goto(process.env.BASE_URL);
+           await this.page.goto(process.env.BASE_URL, { waitUntil: 'domcontentloaded' });
 
-        await this.page.evaluate(() => {
-            const ad = document.getElementById('ad_position_box');
-            if (ad) ad.remove();
-        });
-
-        await this.page.evaluate(() => {
-            const removeAd = () => {
-                const ad = document.getElementById('ad_position_box');
-                if (ad) ad.remove();
-            };
-            removeAd();
-            const observer = new MutationObserver(removeAd);
-            observer.observe(document.body, { childList: true, subtree: true });
-        });
+            await this.page.evaluate(() => {
+                   const ad = document.getElementById('ad_position_box');
+                   if (ad) ad.remove();
+            });
     }
 
     static async setUp(headless = false) {
@@ -47,18 +37,20 @@ class BaseDriver {
             locale: 'en-US',
         });
 
-      /*  await this.context.addInitScript(() => {
+        await this.context.route('**/ad_script_or_ad_url.js', route => route.abort());
+
+        await this.context.addInitScript(() => {
                 const removeAd = () => {
                     const ad = document.getElementById('ad_position_box');
                     if (ad) ad.remove();
                 };
-
                 removeAd();
                 new MutationObserver(removeAd).observe(document.documentElement, {
                     childList: true,
                     subtree: true,
                 });
-        });*/
+       });
+
         this.page = await this.context.newPage();
     }
 
